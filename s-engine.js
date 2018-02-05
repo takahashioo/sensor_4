@@ -1,30 +1,30 @@
 window.onload=function(){
 if(!localStorage) {
-alert('繝ｭ繝ｼ繧ｫ繝ｫ繧ｹ繝医Ξ繝ｼ繧ｸ縺ｫ蟇ｾ蠢懊＠縺ｦ縺�↑縺�');
+alert('ローカルストレージに対応していない');
 }
-// 繧ｻ繝�す繝ｧ繝ｳ繧ｹ繝医Ξ繝ｼ繧ｸ蟇ｾ蠢懷愛螳�
+// セッションストレージ対応判定
 if(!sessionStorage) {
-alert('繧ｻ繝�す繝ｧ繝ｳ繧ｹ繝医Ξ繝ｼ繧ｸ縺ｫ蟇ｾ蠢懊＠縺ｦ縺�↑縺�');
+alert('セッションストレージに対応していない');
 	}
 }
 
-//繝ｭ繝ｼ繧ｫ繝ｫ繧ｹ繝医Ξ繝ｼ繧ｸ繧貞炎髯､
+//ローカルストレージを削除
 function removeConfig(){
 	localStorage.clear();
-	alert("蜑企勁縺励∪縺励◆");
+	alert("削除しました");
 }
 
 
 function startstop(){
-if (document.getElementById("startstop").innerHTML=="貂ｬ螳夐幕蟋�"){
+if (document.getElementById("startstop").innerHTML=="測定開始"){
 
-sensor_on(); //髢句ｧ�
-document.getElementById("startstop").innerHTML="蛛懈ｭ｢";
+sensor_on(); //開始
+document.getElementById("startstop").innerHTML="停止";
 
 } else {
 
-sensor_off(); //蛛懈ｭ｢
-document.getElementById("startstop").innerHTML="貂ｬ螳夐幕蟋�";
+sensor_off(); //停止
+document.getElementById("startstop").innerHTML="測定開始";
 
 	}
 }
@@ -36,36 +36,36 @@ document.getElementById("startstop").innerHTML="貂ｬ螳夐幕蟋�";
 		
     	
 	function sensor_on(){
-		localStorage.clear(); //繧ｹ繧ｿ繝ｼ繝域凾縺ｫ繧ｯ繝ｪ繧｢繝ｼ
+		localStorage.clear(); //スタート時にクリアー
 	        window.addEventListener("devicemotion", sensor,false);
       		};
 
         function sensor(e){
 
-	  //譌･莉假ｼ医ち繧､繝�繧ｹ繧ｿ繝ｳ繝暦ｼ�
+	  //日付（タイムスタンプ）
 	  var date = new Date() ;
 	  var time_unix = date.getTime() ;
 	  printValue("unixtime", time_unix);
 			
-	  //蜉�騾溷ｺｦ
+	  //加速度
 	  var acc = e.acceleration;
 	  var x = Numlimit5(acc.x);
 	  var y = Numlimit5(acc.y);
 	  var z = Numlimit5(acc.z);
 
-	  //蜉�騾溷ｺｦ(驥榊鴨蜉�騾溷ｺｦ)
+	  //加速度(重力加速度)
 	  var acc_g = e.accelerationIncludingGravity;
 	  var gx = Numlimit5(acc_g.x);
 	  var gy = Numlimit5(acc_g.y);
 	  var gz = Numlimit5(acc_g.z);
 
-	  //蝗櫁ｻ｢
+	  //回転
 	  var rota_r = e.rotationRate;
 	  var ra = Numlimit5(rota_r.alpha);
 	  var rb = Numlimit5(rota_r.beta); 
 	  var rg = Numlimit5(rota_r.gamma);
 
-	  //蜿門ｾ怜､縺ｮ陦ｨ遉ｺ
+	  //取得値の表示
 
 	  printValue('acc-x', x); //x
 	  printValue('acc-y', y); //y
@@ -79,10 +79,10 @@ document.getElementById("startstop").innerHTML="貂ｬ螳夐幕蟋�";
 	  printValue('rr-b', rb); //rb
 	  printValue('rr-g', rg); //rg 
 
-	  //菫晏ｭ倥ョ繝ｼ繧ｿ
+	  //保存データ
 	  var datalist = {acc_x:x,acc_y:y,acc_z:z,acc_gx:gx,acc_gy:gy,acc_gz:gz,rr_a:ra,rr_b:rb,rr_g:rg}
 
-	  //繝ｭ繝ｼ繧ｫ繝ｫ繧ｹ繝医Ξ繝ｼ繧ｸ縺ｫ險倬鹸
+	  //ローカルストレージに記録
 	  localStorage.setItem(time_unix, JSON.stringify(datalist));
 
 	  function printValue(id, value){
@@ -96,7 +96,7 @@ document.getElementById("startstop").innerHTML="貂ｬ螳夐幕蟋�";
 
 
 function list(){
-  alert("> 繧ｭ繝ｼ縺ｮ荳隕ｧ繧貞�謖吶☆繧�");
+  alert("> キーの一覧を列挙する");
   for(var i = 0; i < localStorage.length ; i++) {
 
 	var localstragekey = localStorage.key(i)
@@ -158,7 +158,7 @@ function exportcsv(){
 		
 	}
 
-	//繧ｭ繝ｼ縺ｮ蛟､繧辰SV逕ｨ縺ｫ繝ｪ繧ｹ繝亥喧
+	//キーの値をCSV用にリスト化
 	finalVal += localstragekey +","+ d_acc_x +","+ d_acc_y +","+ d_acc_z +","+ d_acc_gx +","+ d_acc_gy +","+ d_acc_gz +","+ d_rr_a +","+ d_rr_b +","+ d_rr_g +'\n';
   }
 
