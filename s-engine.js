@@ -45,6 +45,7 @@ document.getElementById("startstop").innerHTML="測定開始";
 	  //日付（タイムスタンプ）
 	  var date = new Date() ;
 	  var time_unix = date.getTime() ;
+          setInterval("unixtime", 10)
 	  printValue("unixtime", time_unix);
 			
 	  //加速度
