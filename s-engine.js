@@ -41,7 +41,7 @@ document.getElementById("startstop").innerHTML="測定開始";
       		};
 
         function sensor(e){
-　　　　　 setInterval("printValue()", 10)
+　　　　　
 	  //日付（タイムスタンプ）
 	  var date = new Date() ;
 	  var time_unix = date.getTime() ;
