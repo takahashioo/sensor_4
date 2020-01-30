@@ -41,7 +41,9 @@ document.getElementById("startstop").innerHTML="測定開始";
       		};
 
         function sensor(e){
-
+　	   
+	   setInterval("sensor(e)", 10); //取得間隔
+		
 	  //日付（タイムスタンプ）
 	  var date = new Date() ;
 	  var time_unix = date.getTime() ;
@@ -65,8 +67,7 @@ document.getElementById("startstop").innerHTML="測定開始";
 	  var rb = Numlimit5(rota_r.beta); 
 	  var rg = Numlimit5(rota_r.gamma);
 
-          //取得間隔
-           e.interval = 10;
+          
 		
 	  //取得値の表示
 	  printValue('acc-x', x); //x
