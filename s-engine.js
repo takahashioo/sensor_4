@@ -49,21 +49,21 @@ document.getElementById("startstop").innerHTML="測定開始";
 			
 	  //加速度
 	  var acc = e.acceleration;
-	  var x = Numlimit5(acc.x);
-	  var y = Numlimit5(acc.y);
-	  var z = Numlimit5(acc.z);
+	  var x = Numlimit7(acc.x);
+	  var y = Numlimit7(acc.y);
+	  var z = Numlimit7(acc.z);
 
 	  //加速度(重力加速度)
 	  var acc_g = e.accelerationIncludingGravity;
-	  var gx = Numlimit5(acc_g.x);
-	  var gy = Numlimit5(acc_g.y);
-	  var gz = Numlimit5(acc_g.z);
+	  var gx = Numlimit7(acc_g.x);
+	  var gy = Numlimit7(acc_g.y);
+	  var gz = Numlimit7(acc_g.z);
 
 	  //回転
 	  var rota_r = e.rotationRate;
-	  var ra = Numlimit5(rota_r.alpha);
-	  var rb = Numlimit5(rota_r.beta); 
-	  var rg = Numlimit5(rota_r.gamma);
+	  var ra = Numlimit7(rota_r.alpha);
+	  var rb = Numlimit7(rota_r.beta); 
+	  var rg = Numlimit7(rota_r.gamma);
 
           
 		
@@ -90,8 +90,8 @@ document.getElementById("startstop").innerHTML="測定開始";
 	  var id_obj = document.getElementById(id);
 	  id_obj.innerHTML = value;
 		}
-	  function Numlimit5(obj){
-	  return Number(obj).toFixed(5);
+	  function Numlimit7(obj){
+	  return Number(obj).toFixed(7);
 	  	}
 	}
 
