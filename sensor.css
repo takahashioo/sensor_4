@@ -1,11 +1,11 @@
 input#startbutton, input#stopbutton{
-	width:10em;
+	width:10ex;
 	}
 
 h2{
-	font-size:1.2em;
+	font-size:1.2ex;
 	font-weight:bold;
-	background-color:#cccccc;
+	background-color:#222222;
 	}
 
 button#startstop{
