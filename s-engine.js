@@ -2,13 +2,13 @@ window.onload=function(){
 if(!localStorage) {
 alert('ローカルストレージに対応していない');
 }
-// セッションストレージ対応判定
+
 if(!sessionStorage) {
 alert('セッションストレージに対応していない');
 	}
 }
 
-//ローカルストレージを削除
+
 function removeConfig(){
 	localStorage.clear();
 	alert("削除しました");
@@ -18,12 +18,12 @@ function removeConfig(){
 function startstop(){
 if (document.getElementById("startstop").innerHTML=="測定開始"){
 
-sensor_on(); //開始
+sensor_on(); 
 document.getElementById("startstop").innerHTML="停止";
 
 } else {
 
-sensor_off(); //停止
+sensor_off(); 
 document.getElementById("startstop").innerHTML="測定開始";
 
 	}
@@ -36,30 +36,30 @@ document.getElementById("startstop").innerHTML="測定開始";
 		
     	
 	function sensor_on(){
-		localStorage.clear(); //スタート時にクリアー
+		localStorage.clear(); 
 	        window.addEventListener("devicemotion", sensor,false);
       		};
 
         function sensor(e){
 　　　　　
-	  //日付（タイムスタンプ）
+	  
 	  var date = new Date() ;
 	  var time_unix = date.getTime() ;
 	  printValue("unixtime", time_unix);
 			
-	  //加速度
+	  
 	  var acc = e.acceleration;
 	  var x = Numlimit5(acc.x);
 	  var y = Numlimit5(acc.y);
 	  var z = Numlimit5(acc.z);
 
-	  //加速度(重力加速度)
+	  
 	  var acc_g = e.accelerationIncludingGravity;
 	  var gx = Numlimit5(acc_g.x);
 	  var gy = Numlimit5(acc_g.y);
 	  var gz = Numlimit5(acc_g.z);
 
-	  //回転
+	  
 	  var rota_r = e.rotationRate;
 	  var ra = Numlimit5(rota_r.alpha);
 	  var rb = Numlimit5(rota_r.beta); 
@@ -67,7 +67,7 @@ document.getElementById("startstop").innerHTML="測定開始";
 
           
 		
-	  //取得値の表示
+	  
 	  printValue('acc-x', x); //x
 	  printValue('acc-y', y); //y
 	  printValue('acc-z', z); //z
@@ -80,10 +80,10 @@ document.getElementById("startstop").innerHTML="測定開始";
 	  printValue('rr-b', rb); //rb
 	  printValue('rr-g', rg); //rg 
 
-	  //保存データ
+	  
 	  var datalist = {acc_x:x,acc_y:y,acc_z:z,acc_gx:gx,acc_gy:gy,acc_gz:gz,rr_a:ra,rr_b:rb,rr_g:rg}
 
-	  //ローカルストレージに記録
+	  
 	  localStorage.setItem(time_unix, JSON.stringify(datalist));
 
 	  function printValue(id, value){
@@ -114,13 +114,13 @@ function list(){
 	}
 	display_row = localstragekey +","+ d_acc_x+","+ d_acc_gx+","+d_rr_a;
 
-    alert(display_row);    // 'banana','mango'
+    alert(display_row);   
   }
 
 }
 
 
-//function
+
 function exportcsv(){
 
   var finalVal = '';
@@ -159,20 +159,19 @@ function exportcsv(){
 		
 	}
 
-	//キーの値をCSV用にリスト化
+	
 	finalVal += localstragekey +","+ d_acc_x +","+ d_acc_y +","+ d_acc_z +","+ d_acc_gx +","+ d_acc_gy +","+ d_acc_gz +","+ d_rr_a +","+ d_rr_b +","+ d_rr_g +'\n';
   }
 
 
 
-// Display the month, day, and year. getMonth() returns a 0-based number.
+
 var date = new Date();
 var year = date.getFullYear();
 var month = ("0"+(date.getMonth() + 1)).slice(-2);
 var day = ("0"+date.getDate()).slice(-2); 
 
 
-  //set csv-data to a-tag on html
   var download = document.getElementById('download');
   download.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(finalVal));
 
